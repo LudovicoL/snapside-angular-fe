@@ -1,0 +1,12 @@
+@import "https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css";
+
+
+.jumbotron{
+  background-color: rgba(0, 0, 0, 0.30)!important;
+  backdrop-filter: blur(10px);
+}
+
+#notif-box{
+  backdrop-filter: blur(8px);
+  border-radius: 8px;
+}

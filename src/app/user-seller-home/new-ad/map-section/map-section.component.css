@@ -1,0 +1,21 @@
+#map {
+  height: 500px;
+  width: 100%;
+ }
+
+
+ agm-map {
+  height: 40vh;
+  width: 100%;
+}
+
+#map-cont{
+  /* height: 40vh; */
+  width: 100%;
+}
+
+
+.toast {
+    opacity: 1 !important;
+}
+

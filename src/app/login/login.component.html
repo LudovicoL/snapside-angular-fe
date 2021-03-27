@@ -1,0 +1,67 @@
+<app-header></app-header>
+<div class="jumbotron jumbotron-fluid p-5" style="background-color:rgba(49, 49, 49, 0.50);">
+    <div class="container"  >
+      <h1 class="display-4" style="color:aliceblue; font-size: xx-large; margin-top: 0cm;">Welcome</h1>
+      <p class="lead" style="color:aliceblue">Please enter your username and password.</p>
+    </div>
+  </div>
+
+<div id="loginBox" class="container-fluid rounded p-3" style="margin-top:10px ;border: 2px solid rgb(255, 255, 255);background-color: rgba(0, 0, 0, 0.60); max-width: 400px; min-width: 300px; ">
+
+    <!-- <div class="col-sm-9 col-md-7 col-lg-5 mx-auto"> -->
+        <div class="panel panel-default">
+      <!-- <div class="panel-heading"><h3 class="panel-title" style="color: aliceblue;"><strong>Log me in</strong></h3></div> -->
+      <div class="panel-heading"><h4 class="display-4" style=" font-size: x-large; color: aliceblue;">Log me in</h4></div>
+      <hr class="margin-bottom">
+      <div class="panel-body">
+       <form class="DOES_NOT_needs-validation" name=form (ngSubmit)="f.form.valid " #f="ngForm" novalidate role="form">
+      <div class="form-group margin-bottom">
+        <label for="username"> </label>
+        <input (keydown)="onKeydown($event)" type="text" class="form-control margin-bottom" name="username" placeholder="Enter username" [(ngModel)]="model.username" #username="ngModel" required>
+        <div class="invalid-feedback">
+            Please enter your username
+          </div>
+      </div>
+      <div class="form-group">
+        <!-- FORGOT PASSWORD LINK -->
+        <!-- <label for="exampleInputPassword1">Password <a href="/sessions/forgot_password">(forgot password)</a></label> -->
+        <label for="inputPassword"> </label>
+        <input (keydown)="onKeydown($event)" type="password" class="form-control" name="password" placeholder="Enter password" [(ngModel)]="model.password" #password="ngModel" required>
+        <div class="invalid-feedback">
+            Please enter your password
+          </div>
+      </div>
+      <br>
+      <button type="submit"  class="btn btn-primary" (click)="login(f)"><span>&nbsp;&nbsp;</span>Login<span>&nbsp;&nbsp;</span></button>
+    </form>
+      </div>
+    </div>
+    </div>
+<!-- </div> -->
+
+<br>
+<br>
+
+<div id="myDiv" class="container-fluid center" style="max-width:90vw; min-width:20vw">
+<hr>
+
+
+
+    <div class="alert alert-danger" role="alert" *ngIf="logInFailed " @fadeIn @fadeOut>
+        Entered username does not exist or wrong password. Authentication failed.
+      </div>
+
+<div class="alert alert-warning" role="alert" *ngIf="f.submitted && (!username.valid || !password.valid)" @fadeIn @fadeOut>
+    Please fill both username and password fields to log in.
+  </div>
+
+  <!-- <div class="alert alert-success" role="alert" *ngIf="(username.valid && password.valid)" @fadeIn @fadeOut>
+      Fields are OK
+    </div> -->
+
+    </div>
+
+
+<nav class="navbar navbar-dark bg-dark fixed-bottom ">
+  <span class="navbar-brand mb-0 h1">Unisalento - Software Engeneering 2019-2020</span>
+</nav>

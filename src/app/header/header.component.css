@@ -1,0 +1,15 @@
+/* .navbar {
+  -webkit-box-shadow: 0 8px 6px -6px rgb(0, 0, 0);
+  -moz-box-shadow: 0 8px 6px -6px rgb(0, 0, 0);
+  box-shadow: 0 8px 6px -6px rgb(0, 0, 0);
+
+
+}
+
+
+*/
+ .navbar {
+backdrop-filter: blur(10px);
+
+
+}

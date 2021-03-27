@@ -1,0 +1,136 @@
+<!-- <p>admin-manage-schema works!</p> -->
+
+<div class="container-fluid">
+<div class="container">
+
+
+    <a class="list-group-item rounded mb-3"  style="width: fit-content; backdrop-filter: blur(30px); color:aliceblue; background-color: rgba(0, 0, 0, 0.50);">
+      <p>Legend:</p>
+      <i class="fa fa-chevron-right" ></i> <b> Category </b> <i class="fas fa-circle" ></i> Item <i class="far fa-circle" ></i> Attribute
+    </a>
+
+  <button class="btn btn-light mb-3" id="toggle_c-e" >Expand/Collapse all</button>
+
+  <div class="list-group list-group-root well rounded">
+
+
+    <ng-containter *ngFor="let c of categories; let i = index">
+    <a class="list-group-item pr-3" href="#{{'cat-'+c.idcategory}}" data-toggle="collapse" style="backdrop-filter: blur(30px); color:aliceblue; background-color: rgba(0, 0, 0, 0.808); border-color: rgba(240, 248, 255, 0.20)">
+      <div class="d-flex w-100 justify-content-between mt-0" >
+        <div class="d-flex flex-row bd-highlight mt-2">
+          <div class="my-0">
+            <i class="fa fa-chevron-right" ></i> <b> {{c.categoryName}} (#{{c.idcategory}})</b>
+          </div>
+
+        </div>
+          <button href="javascript:void(0)" data-toggle="modal" data-target="#deleteModal" (click)="onEvent($event);getDeleteTitle(c.categoryName);setDeleteId(c.idcategory);showDeleteModal(); false" class="my-0 btn btn-danger"><i class="fa fa-trash"></i></button>
+      </div>
+
+    </a>
+    <div class="list-group collapse tog" id="{{'cat-'+c.idcategory}}">
+      <div *ngFor="let i of c['item']">
+    <a class="list-group-item"  style="padding-left: 2rem; backdrop-filter: blur(30px); color:aliceblue; background-color: rgba(0, 0, 0, 0.508);">
+        <i class="fas fa-circle"></i> {{i.name}}
+     </a>
+
+     <div class="list-group" >
+      <a *ngFor="let a of i['attribute']" class="list-group-item" style="padding-left: 4rem; backdrop-filter: blur(30px); color:aliceblue; background-color: rgba(0, 0, 0, 0.208);" >
+          <i class="far fa-circle"></i> {{a.attributeName}}
+       </a>
+      </div>
+      </div>
+    </div>
+    </ng-containter>
+  </div>
+</div>
+
+
+  <div class="container-fluid center mx-0 px-2 mt-3">
+    <div id="caps" class="jumbotron jumbotron-fluid py-3 mb-3 pt-3" style="background-color:rgba(49, 49, 49, 0.50); ">
+        <!-- <div class="container-fluid p-0 m-0"> -->
+              <h4 class="display-4 p-0" style="color:aliceblue; font-size: xx-large; margin-left: 20px;">Create new ad schema</h4>
+              <p class="lead pb-0 mb-0" style="color:aliceblue; margin-left:25px">Create a new category adding items and attributes related to it. A category must have at least one item associated to it.</p>
+            <!-- </div> -->
+          </div>
+    </div>
+
+    <div class="container pt-3" id="create-schema" style="margin-bottom: 100px;">
+      <form >
+        <div class="form-group">
+
+          <div class="input-group mb-2">
+            <input class="form-control form-control-lg mb-3" #newCat [(ngModel)]="newCategory"  name="ncat"  type="text" placeholder="Insert new category name">
+            <div class="input-group-append">
+              <button style="display: none;"> This invisible button catches and annihilates the submit form signal on enter key press</button>
+              <button class="btn btn-primary" style="height: 48px;" (click)="addItem()" >Add new item to category</button>
+            </div>
+        </div>
+
+        <div *ngFor="let item of newItems;let i=index" class="input-group mb-1">
+          <input class="form-control mb-2"  #newi [(ngModel)]="newItems[i][0].itemName"  name="nameItem{{i}}"  id="newi"  type="text" placeholder="Item" >
+          <div class="input-group-append">
+            <button class="btn btn-danger " style="height: 38px;" (click)="removeItem(i)"  ><i class="p-0 m-0 fa fa-times "></i> Remove item</button>
+            <button class="btn btn-primary"  style="height: 38px;" (click)="addAttribute(i)"  >Add attribute</button>
+          </div>
+
+          <div *ngFor="let a of newItems[i][1]; let ia = index" class="input-group">
+        <input class="form-control form-control-sm mb-1 ml-4" #newa [(ngModel)]="newItems[i][1][ia].attributeName"  name="nameAttribute{{i}}{{ia}}"  id="newa"                     type="text"  placeholder="Attribute">
+        <div class="input-group-append">
+          <button class="btn btn-danger py-0" style="height: 30px;"  (click)="removeAttribute(i,ia)"><i class="p-0 m-0 fa fa-times"></i> Remove attribute</button>
+        </div>
+      </div>
+
+      </div>
+
+
+    </div>
+      </form>
+      <button *ngIf="newItems.length>0" class="btn btn-success mb-3" data-toggle="modal" data-target="#confirmModal">Create schema</button>
+    </div>
+
+    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirm</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              Do you confirm this schema creation?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+
+            <!-- per fare il refresh in alternativa puoi usare la funzione refresh() che avevo fatto e serve a aggiornare l intera pagina invece del solo componente come con this.ngOnInit() -->
+            <button type="button" data-dismiss="modal" class="btn btn-success"  (click)="saveNewSchema()">Yes, save the schema</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Modal -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Delete schema {{deleteTitle}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            Are you sure you want to delete this schema? <br>
+            <b style="color: red">WARNING:</b> All ads and data associated to this schema will be lost. This cannot be undone.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+          <!-- per fare il refresh in alternativa puoi usare la funzione refresh() che avevo fatto e serve a aggiornare l intera pagina invece del solo componente come con this.ngOnInit() -->
+          <button type="button" data-dismiss="modal" class="btn btn-danger" (click)="deleteSchema(deleteId);">Yes, destroy it</button>
+        </div>
+      </div>
+    </div>
+  </div>

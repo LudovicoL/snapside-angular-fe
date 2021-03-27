@@ -1,0 +1,98 @@
+<!-- <p>seller-reservations works!</p> -->
+
+<div class="container-fluid center mx-0 px-2 mt-3">
+  <div id="caps" class="jumbotron jumbotron-fluid py-3 mb-3 pt-3" style="background-color:rgba(49, 49, 49, 0.50); ">
+      <!-- <div class="container-fluid p-0 m-0"> -->
+            <h4 class="display-4 p-0" style="color:aliceblue; font-size: xx-large; margin-left: 20px;">Reservations list</h4>
+            <p class="lead pb-0 mb-0 mr-4" style="color:aliceblue; margin-left:25px">This is the list of your reservations sorted by the most recent. Reservations are kept for 30 days more after the check-out date.
+              Click on customer username or ad title to get more details.</p>
+          <!-- </div> -->
+        </div>
+  </div>
+
+<div class="container">
+<table class="table table-striped table-dark rounded table-borderless">
+  <thead>
+    <tr>
+      <th scope="col">Ad </th>
+      <th scope="col"> </th>
+      <th scope="col">Check In</th>
+      <th scope="col">Check Out</th>
+      <th scope="col">Paid price</th>
+      <th scope="col">Payment channel</th>
+      <th scope="col">Customer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let b of benefits">
+      <td class="align-middle" [routerLink]="['../inspect-ad']" [queryParams]="{idAd:b['idAd']}" routerLinkActive="router-link-active" class="align-middle" *ngIf="b"><img *ngIf="b['preview']" [src]="b['preview']" class="rounded-small border border-dark p-0 m-0" style=" margin-top:0px ;height:42px;width: 42px;"></td>
+      <td class="align-middle" [routerLink]="['../inspect-ad']" [queryParams]="{idAd:b['idAd']}" routerLinkActive="router-link-active">(#{{b['idAd']}}) {{b['adTitle']}}</td>
+      <td class="align-middle">{{prettyDate(b.checkinDate)}}</td>
+      <td class="align-middle">{{prettyDate(b.checkoutDate)}}</td>
+      <td class="align-middle">EUR {{b.paidAmount}}</td>
+      <td class="align-middle">{{b.paymentType}}</td>
+      <td class="align-middle" href="javascript:void(0)" data-toggle="modal" data-target="#createEventModal" (click)="selectCustomer(b['idCustomer'])">@{{b['customer']}}</td>
+    </tr>
+  </tbody>
+
+</table>
+
+
+<div id="createEventModal" class="modal fade">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 id="modalTitle" style="text-align: left;">Customer details</h4>
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span> <span class="sr-only">close</span></button>
+          </div>
+          <div id="modalBody" class="modal-body">
+          <!-- <p id="realName"></p>
+          <p id="surname"></p>
+          <p id="username"></p>
+          <p id="email"></p>
+          <p id="address"></p> -->
+
+          <img *ngIf="selectedCustomer" [src]="selectedCustomer['userImgSanitized']" class="rounded-circle img-fluid border border-dark p-0 mr-2 mb-3"
+          style=" margin-top:0px ;height: 100%; max-height:150px; max-width: 150px;"  alt="assets/utils_imgs/nouserimg.svg">
+          <table class="table">
+              <thead>
+                <tr>
+                  <!-- <th scope="col"> column title </th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Name</th>
+                  <td id="realName">{{selectedCustomer?.name}}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Surname</th>
+                  <td id="surname">{{selectedCustomer?.surname}}</td>
+
+                </tr>
+                <tr>
+                  <th scope="row">Username</th>
+                  <td id="username">{{selectedCustomer?.username}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">E-mail</th>
+                    <td id="email">{{selectedCustomer?.email}}</td>
+                  </tr>
+                  <tr>
+                      <th scope="row">Phone number</th>
+                      <td id="phone">{{selectedCustomer?.phone}}</td>
+                    </tr>
+                  <tr>
+                      <th scope="row">Address</th>
+                      <td id="address">{{selectedCustomer?.address}}</td>
+                    </tr>
+              </tbody>
+            </table>
+          <div class="modal-footer pt-3">
+              <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">OK</button>
+              <!-- <button type="submit" class="btn btn-primary" id="submitButton">Save</button> -->
+          </div>
+      </div>
+  </div>
+</div>
+</div>

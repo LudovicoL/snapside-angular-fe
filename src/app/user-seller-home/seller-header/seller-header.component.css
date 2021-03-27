@@ -1,0 +1,48 @@
+.navbar {
+  -webkit-box-shadow: 0 8px 30px -3px rgb(0, 0, 0);
+  -moz-box-shadow: 0 8px 30px -3px rgb(0, 0, 0);
+  box-shadow: 0 1px 8px 0px rgba(0, 0, 0, 0.8);
+  /* padding: 10px 30px;
+  margin: 20px -20px; */
+  /* the rest of your styling */
+}
+.navbar ul li a {
+  color: lightcyan}
+
+.navbar ul li a:hover {
+  color: rgb(153, 235, 255) }
+  /* color:rgb(255, 251, 0); */
+
+/* the id tag overrides navbar settings */
+#somethingNew:hover {
+color: aquamarine
+}
+
+#danger:hover {
+color: rgb(255, 100, 100)
+}
+.scrollable-menu {
+  height: auto;
+  max-height: 50vh;
+  overflow-x: hidden;
+}
+
+
+#searchInput::-webkit-search-cancel-button{
+  /* visibility: visible; */
+  display: none;
+
+}
+
+#navSeller {
+  margin-left:-10px!important;
+  padding-left:32px!important;
+  margin-right:-10px!important;
+  padding-right:22px!important;
+  backdrop-filter: blur(20px);
+  /* background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(28, 84, 168, 0.80)); */
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1));
+
+}
+
+

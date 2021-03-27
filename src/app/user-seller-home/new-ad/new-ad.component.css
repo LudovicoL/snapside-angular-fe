@@ -1,0 +1,52 @@
+#map {
+  height: 500px;
+  width: 100%;
+ }
+
+
+ agm-map {
+  height: 300px;
+}
+
+
+::ng-deep .mat-focused .mat-form-field-label {
+
+  color: white !important;
+ }
+
+ ::ng-deep.mat-form-field-underline {
+
+  background-color: white !important;
+ }
+
+ ::ng-deep.mat-form-field-ripple {
+
+  background-color: white !important;;
+ }
+
+ ::ng-deep .mat-form-field-label {
+
+  color: white !important;
+ }
+
+ ::ng-deep .mat-form-field {
+
+  color: white !important;
+ }
+
+ mat-datepicker-toggle {
+  color: white !important;
+ }
+
+
+ .jumbotron{
+
+  backdrop-filter: blur(20px);
+  border-radius: 5px;
+}
+
+#content.container-fluid{
+  background-color: rgba(0, 0, 0, 0.3)!important;
+  backdrop-filter: blur(10px);
+  border-radius: 8px!important;
+}

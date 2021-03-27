@@ -1,0 +1,251 @@
+<!-- <div style="text-align: center">
+  <h1>Snapside Web</h1>
+</div> -->
+
+
+<nav class="navbar fixed-top navbar-expand-sm navbar-dark " style="z-index:1000;">
+  <a class="navbar-brand" >
+    <img src="assets/utils_imgs/snapside_brand.svg" width="30" height="30" alt="">
+  </a>
+  <div *ngIf="this.router.url.split('/').pop()==='admin-ads-list'">
+
+    <a class="navbar-brand"  [routerLink]="['/user/admin/'+this.userid+'/home']" routerLinkActive="router-link-active"  >Snapside Web - Your home</a>
+
+
+</div>
+
+<div *ngIf="this.router.url.split('/').pop()==='admin-manage-schema'">
+  <a class="navbar-brand"  [routerLink]="['/user/admin/'+this.userid+'/home']" routerLinkActive="router-link-active"  >Snapside Web - Ad schemas</a>
+</div>
+
+
+<div *ngIf="this.router.url.split('/').pop()==='admin-users-list'">
+  <a class="navbar-brand"  [routerLink]="['/user/admin/'+this.userid+'/home']" routerLinkActive="router-link-active"  >Snapside Web - Users list</a>
+</div>
+
+      <div *ngIf="this.router.url.split('/').pop()==='ads-list'">
+
+
+          <a class="navbar-brand"  [routerLink]="['/user/seller/'+this.userid+'/home']" routerLinkActive="router-link-active"  >Snapside Web - Your home</a>
+
+
+      </div>
+
+
+      <div *ngIf="this.router.url.search('new-ad')>-1">
+
+
+          <a class="navbar-brand"  [routerLink]="['/user/seller/'+this.userid+'/home']" routerLinkActive="router-link-active" >Snapside Web - Create new ad</a>
+
+
+      </div>
+
+
+
+
+  <div *ngIf="this.router.url.search('notifs-list')>-1">
+
+
+      <a class="navbar-brand" [routerLink]="['/user/seller/'+this.userid+'/home']" routerLinkActive="router-link-active" >Snapside Web - Your notifications</a>
+
+
+  </div>
+
+
+  <div *ngIf="this.router.url.search('inspect-ad')>-1">
+
+
+      <a class="navbar-brand"  [routerLink]="['/user/seller/'+this.userid+'/home']" routerLinkActive="router-link-active" >Snapside Web - Inspect ad</a>
+
+
+  </div>
+
+
+  <div *ngIf="this.router.url.search('edit-ad')>-1">
+
+
+      <a class="navbar-brand"  [routerLink]="['/user/seller/'+this.userid+'/home']" routerLinkActive="router-link-active" >Snapside Web - Edit ad</a>
+
+
+  </div>
+
+  <div *ngIf="this.router.url.search('seller-reservations')>-1">
+
+
+    <a class="navbar-brand"  [routerLink]="['/user/seller/'+this.userid+'/home']" routerLinkActive="router-link-active" >Snapside Web - Reservations</a>
+
+
+</div>
+
+
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <!-- <span class="navbar-toggler-icon"></span> -->
+      <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <!-- <li class="nav-item active">
+          <a class="nav-link" href="#">Register<span class="sr-only">(current)</span></a>
+        </li> -->
+        <!-- <li class="nav-item active">
+            <a class="nav-link" [routerLink]="['/about']" routerLinkActive="router-link-active" >About<span class="sr-only">(current)</span></a>
+          </li> -->
+
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li> -->
+      </ul>
+<!-- SEARCH BAR at right -->
+      <!-- <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form> -->
+
+
+      <ul class="nav navbar-nav navbar-right navbar-dark">
+
+
+          <!-- <a class="nav-link active" style="margin-top: 2px ;" [routerLink]="['/about']" routerLinkActive="router-link-active" >About<span class="sr-only">(current)</span></a> -->
+
+          <!-- <a class="nav-link" style="margin-top: 2px ;" href="/">Logout</a> -->
+
+          <div *ngIf="userData; else show_loading_message" class="dropdown show mb-0 pb-0 d-flex" style="margin-top: 2px;">
+              <a class="nav-link active dropdown-toggle" href="#" role="link" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  User: {{userData?.name}} {{userData?.surname}} [{{userRole}}]
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item"  data-toggle="modal" data-target="#profileModal.modal" href='javascript:void(0)'>Your profile</a>
+
+                  <!-- <a class="dropdown-item" [routerLink]="['/about']" routerLinkActive="router-link-active" >About</a> -->
+                  <a class="dropdown-item" href='javascript:void(0)' data-toggle="modal" data-target="#aboutModal.modal" >About</a>
+
+                  <a class="dropdown-item mt-2" href='/'>Logout</a>
+                </div>
+                <img *ngIf="userData" [src]="userData['userImgSanitized']" class="rounded-circle img-fluid border border-dark p-0 mr-2" style=" margin-top:0px ;height: 100%; max-height:42px; max-width: 42px;"  alt="assets/utils_imgs/nouserimg.svg">
+              </div>
+
+              <!-- (ID: {{userid}}) -->
+
+
+          <ng-template #show_loading_message>
+              <a style="color:mediumturquoise">Loading...</a>
+          </ng-template>
+
+
+
+
+          </ul>
+    </div>
+  </nav>
+
+
+
+  <div id="aboutModal" class="modal fade">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header pb-1">
+                  <h4 id="modalTitle" style="text-align: left;">About this app</h4>
+                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span> <span class="sr-only">close</span></button>
+              </div>
+              <div id="modalBody" class="modal-body">
+              <!-- <p id="realName"></p>
+              <p id="surname"></p>
+              <p id="username"></p>
+              <p id="email"></p>
+              <p id="address"></p> -->
+              <img src="assets/utils_imgs/snapside_brand.svg" class=" img-fluid  p-0 mr-2 mb-3 mx-auto d-block"
+              style=" margin:auto ;height: 150px; width: 150px;"  alt="brand">
+             <h3>Snapside Web Application</h3>
+             <h5>Angular 8 - Spring Boot 2.2.1 - MySQL 6.3</h5>
+             <p>This app is designed for ads and offers publication and management</p>
+             <h5>Authors: Andrea Chezzi - Ludovico Larini</h5>
+             <h5>Unisalento 2019-2020</h5>
+              <div class="modal-footer pt-3 p-0">
+                <button class="btn btn-primary px-2" style="width: 60px;" data-dismiss="modal" aria-hidden="true">OK</button>
+                  <!-- <button type="submit" class="btn btn-primary" id="submitButton">Save</button> -->
+              </div>
+          </div>
+      </div>
+  </div>
+  </div>
+
+
+
+  <div id="profileModal" class="modal fade" data-background="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="modalTitle" style="text-align: left;">Your profile</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span> <span class="sr-only">close</span></button>
+            </div>
+            <div id="modalBody" class="modal-body">
+            <!-- <p id="realName"></p>
+            <p id="surname"></p>
+            <p id="username"></p>
+            <p id="email"></p>
+            <p id="address"></p> -->
+
+            <img *ngIf="userData" [src]="userData['userImgSanitized']" class="rounded-circle img-fluid border border-dark p-0 mr-2 mb-3 mx-auto d-block"
+            style=" margin:auto ;height: 150px; width: 150px;"  alt="assets/utils_imgs/nouserimg.svg">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <!-- <th scope="col"> column title </th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Name</th>
+                    <td id="realName">{{userData?.name}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Surname</th>
+                    <td id="surname">{{userData?.surname}}</td>
+
+                  </tr>
+                  <tr>
+                    <th scope="row">Username</th>
+                    <td id="username">{{userData?.username}}</td>
+                  </tr>
+                  <tr>
+                      <th scope="row">E-mail</th>
+                      <td id="email">{{userData?.email}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Phone number</th>
+                        <td id="phone">{{userData?.phone}}</td>
+                      </tr>
+                    <tr>
+                        <th scope="row">Address</th>
+                        <td id="address">{{userData?.address}}</td>
+                      </tr>
+                </tbody>
+              </table>
+            <div class="modal-footer pt-3">
+              <button class="btn btn-primary px-2" style="width: 60px;" data-dismiss="modal" aria-hidden="true">OK</button>
+                <!-- <button type="submit" class="btn btn-primary" id="submitButton">Save</button> -->
+            </div>
+        </div>
+    </div>
+  </div>
+  </div>
+
+
+<!-- <p>header-logged works!</p> -->
+

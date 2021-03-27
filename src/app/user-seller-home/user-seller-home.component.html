@@ -1,0 +1,97 @@
+<app-header-logged></app-header-logged>
+<app-seller-header [userid]="userid"></app-seller-header>
+
+<div *ngIf="mobile; else desktop">
+    <div style="padding-top:124px"></div>
+</div>
+
+<ng-template #desktop>
+    <div style="padding-top:120px"></div>
+</ng-template>
+
+
+<!-- <h1>SELLER AREA, USER-ID: {{userid}}</h1> -->
+
+
+<!-- Home content
+
+ADS LIST
+
+
+      <a class="nav-link" routerLink="new-ad" routerLinkActive="router-link-active" >New ad<span class="sr-only">(current)</span></a>
+      <a class="nav-link" routerLink="test" routerLinkActive="router-link-active" >test<span class="sr-only">(current)</span></a> -->
+
+<router-outlet></router-outlet>
+
+
+
+<div aria-live="polite" aria-atomic="true" style="position: fixed; right:0px; top:110px; z-index: 199;">
+    <!-- Position it -->
+    <div class="mr-2" style="position: absolute; top: 0; right: 0; border: 0px solid green;">
+
+      <!-- Then put toasts within -->
+      <div *ngFor="let n of notifs" id="my-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="min-width:52vw; max-width: 100%; border: 0px solid red " data-autohide="false">
+        <div class="toast-header">
+          <!-- <img src="..." class="rounded mr-2" alt="..."> -->
+          <strong class="mr-auto">{{n?.title}}</strong>
+          <small class="text-muted">{{prettyTime(n?.date)}}</small>
+          <button type="button" (click)="closePush(n.idNotif)" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="toast-body">
+          {{n?.subject}}
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+
+  <div aria-live="polite" aria-atomic="true" style="position: fixed; right:20px; top:110px; min-height: 200px;z-index: 198">
+      <!-- Position it -->
+      <div style="position: absolute; top: 0; right: 0;">
+
+        <!-- Then put toasts within -->
+        <div id="newAdCreated" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="min-width: 30vw;" data-autohide="true" data-delay="5000">
+          <div class="toast-header bg-success text-light">
+            <!-- <img src="..." class="rounded mr-2" alt="..."> -->
+            <strong class="mr-auto">Snapside message</strong>
+            <small class="text-muted">-</small>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="toast-body">
+            New ad saved
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+    <div aria-live="polite" aria-atomic="true" style="position: fixed; right:20px; top:110px; min-height: 200px;z-index: 198">
+      <!-- Position it -->
+      <div style="position: absolute; top: 0; right: 0;">
+
+        <!-- Then put toasts within -->
+        <div id="adEdited" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="min-width: 30vw;" data-autohide="true" data-delay="5000">
+          <div class="toast-header bg-success text-light">
+            <!-- <img src="..." class="rounded mr-2" alt="..."> -->
+            <strong class="mr-auto">Snapside message</strong>
+            <small class="text-muted">-</small>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="toast-body">
+            Changes applied to your ad "{{this.focusedAd?.title}}". (#{{this.focusedAd?.idAd}})
+          </div>
+        </div>
+
+
+      </div>
+    </div>

@@ -1,0 +1,43 @@
+
+
+:host {
+  display: block;
+  /* border: 1px solid black; */
+  /* background-image: url('../../assets/background/background.svg'); */
+  /* background-color: rgba(255, 255, 255, 0); */
+  margin: auto;
+  height: 100%;
+  overflow-y: hidden;
+
+}
+body{
+  height: 100vh;
+  overflow: hidden;
+}
+.center-screen {
+  display: block;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+  min-height: 10vh;
+}
+
+.margin-bottom {
+  margin-bottom:3px;}
+
+  br {
+    display: block;
+    margin: 25px 0;
+    content: " ";
+
+ }
+
+ .jumbotron{
+   backdrop-filter: blur(22px);
+ }
+ #loginBox{
+  backdrop-filter: contrast(0.8);
+   backdrop-filter: blur(6px);
+   border-radius: 15px!important;
+ }

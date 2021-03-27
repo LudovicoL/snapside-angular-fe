@@ -1,0 +1,41 @@
+
+#pagin {
+  width: fit-content;
+  height: 44px;
+  margin-bottom: 20px!important;
+  background-color:rgba(240, 248, 255, 0.589);
+  border-radius: 10px;
+  padding-top: 6px;
+  padding-bottom: 16px;
+}
+
+/* .ngx-pagination {
+  padding-left: 0px !important;
+}
+
+.ngx-pagination .current,
+.btn-info {
+  background: #17a2b8 !important;
+  border: transparent !important;
+  border-radius: 20px !important;
+}
+
+.ngx-pagination .current:hover {
+  background: #17a2b8 !important;
+  border-radius: 20px !important;
+  border: transparent !important;
+} */
+
+.jumbotron{
+  background-color: rgba(0, 0, 0, 0.40)!important;
+  backdrop-filter: blur(10px);
+ }
+
+ .list-group-item{
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+ }
+
+ .rounded-small {
+  border-radius:5px!important
+}

@@ -1,0 +1,194 @@
+<p>admin-header works!</p>
+
+
+<nav id="navSeller" class="navbar fixed-top navbar-dark py-1 navbar-expand-lg py-bg-0" style=" margin-top:55px; z-index:999;background-image: linear-gradient(to right, rgba(28, 84, 168, 0.95), rgba(28, 84, 168, 0.95)); ">
+
+  <!-- SELLER INFO IN SELLER HEADER -->
+    <!-- <img [src]="getImageSanitized(userData?.userImg)" class="rounded-circle img-fluid border border-dark p-0 mr-2" style=" margin-top:0px ;height: 100%; max-height:42px; max-width: 42px;"  alt="assets/utils_imgs/nouserimg.svg">
+    <div *ngIf="userData; else show_loading_message">
+
+        <a class="navbar-brand" style="color:aliceblue;font-size: large;"> User: {{userData?.name}} {{userData?.surname}} [Seller]</a>
+
+    </div>
+    <ng-template #show_loading_message>
+        <a style="color:mediumturquoise">Loading...</a>
+    </ng-template> -->
+  <!-- SELLER INFO IN SELLER HEADER -->
+
+<!-- (ID: {{userid}}) -->
+
+
+<!-- <a class="nav-item" style="padding:0px;color:lightskyblue;font-size:x-large;">-</a> -->
+<!-- <a class="nav-item" style="padding:0px;color:lightskyblue;">Menu: </a> -->
+<a class="navbar-brand" style="color:aliceblue">Menu</a>
+
+<a class="nav-item" style="padding:4px;color:lightskyblue;font-size:x-large;"></a>
+
+    <button class="navbar-toggler mt-1" type="button" data-toggle="collapse" data-target="#navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- <i class="fa fa-bars" aria-hidden="true"></i> -->
+        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+    </button>
+    <div class="navbar-collapse collapse" id="navbarNav" *ngIf="this.router.url.search('ads-list')>-1">
+        <ul class="navbar-nav">
+
+            <!-- <li class="nav-item py-0"><a class="nav-link active" class="btn btn-primary"  [routerLink]="['new-ad']" routerLinkActive="router-link-active" >New ad<span class="sr-only">(current)</span></a></li> -->
+            <!-- <li class="nav-item py-0"><a id="somethingNew" class="nav-link active"  [routerLink]="['new-ad']" routerLinkActive="router-link-active" ><i class="fa fa-plus-circle pr-1"  aria-hidden="true"></i>New ad<span class="sr-only">(current)</span></a></li> -->
+            <!-- <li class="nav-item py-0"><a class="nav-link active" [routerLink]="['notifs-list']" routerLinkActive="router-link-active" ><i class="fa fa-inbox pr-1"  aria-hidden="true"></i> Notifications <span *ngIf="this.nnotifs==='1'" class="badge badge-pill badge-warning">New</span> <span class="sr-only">(current)</span></a></li> -->
+            <div class="dropdown show">
+                <a class="nav-link active dropdown-toggle" href="#" role="link" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-sort-amount-down mr-1"></i>Sort by ({{this.currentSortBy}})
+                </a>
+
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" href='javascript:void(0)' (click)="sortBy('startDate'); this.currentSortBy='Nearest availability date'">Nearest availability date</a>
+                  <a class="dropdown-item" href='javascript:void(0)' (click)="sortBy('title'); this.currentSortBy='Title'">Title</a>
+                  <a class="dropdown-item" href='javascript:void(0)' (click)="sortBy('PriceLH'); this.currentSortBy='Price: Low to High'">Price: Low to High</a>
+                  <a class="dropdown-item" href='javascript:void(0)' (click)="sortBy('PriceHL'); this.currentSortBy='Price: High to Low'">Price: High to Low</a>
+                  <a class="dropdown-item" href='javascript:void(0)' (click)="sortBy('idD'); this.currentSortBy='ID: Descendent'">ID: Descendent</a>
+                  <a class="dropdown-item" href='javascript:void(0)' (click)="sortBy('idA'); this.currentSortBy='ID: Ascendent'">ID: Ascendent</a>
+
+
+                </div>
+              </div>
+
+              <div data-toggle="tooltip" data-placement="top" title="Filter by category" class="dropdown show">
+                  <a class="nav-link active dropdown-toggle" href="#" role="link" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     <i class="fa fa-filter mr-1"></i> Category ({{this.categoryName}})
+                  </a>
+
+                  <ul class="dropdown-menu scrollable-menu" aria-labelledby="dropdownMenuLink">
+                      <a class="dropdown-item" href='javascript:void(0)' (click)="filterCatBy('All'); this.categoryName='All' "><b>Show all</b></a>
+                    <a *ngFor="let item of categories" class="dropdown-item" href='javascript:void(0)' (click)="filterCatBy(item.idcategory); this.categoryName=item.categoryName">{{item.categoryName}}</a>
+
+                  </ul>
+                </div>
+
+                <div data-toggle="tooltip" data-placement="top" title="Filter by ad status" class="dropdown show">
+                    <a  class="nav-link active dropdown-toggle" href="#" role="link" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fa fa-filter mr-1"></i> Status ({{this.currentFilterStatus}})
+                    </a>
+
+                    <ul class="dropdown-menu scrollable-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href='javascript:void(0)' (click)="filterStatusBy('All'); this.currentFilterStatus='All'"><b>Show all</b></a>
+                        <a class="dropdown-item" href='javascript:void(0)' (click)="filterStatusBy('published'); this.currentFilterStatus='Published'">Published</a>
+                        <a class="dropdown-item" href='javascript:void(0)' (click)="filterStatusBy('pending'); this.currentFilterStatus='Pending'">Pending</a>
+                         <a class="dropdown-item" href='javascript:void(0)' (click)="filterStatusBy('refused'); this.currentFilterStatus='Refused'">Refused</a>
+                         <a class="dropdown-item" href='javascript:void(0)' (click)="filterStatusBy('drafts'); this.currentFilterStatus='Drafts'">Drafts</a>
+                         <a class="dropdown-item" href='javascript:void(0)' (click)="filterStatusBy('expired'); this.currentFilterStatus='Expired'">Expired</a>
+                         <a class="dropdown-item" href='javascript:void(0)' (click)="filterStatusBy('notExpired'); this.currentFilterStatus='Not expired'">Not expired</a>
+                         <a class="dropdown-item" href='javascript:void(0)' (click)="filterStatusBy('hidden'); this.currentFilterStatus='Deleted by seller'">Deleted by seller</a>
+
+
+                    </ul>
+                  </div>
+
+
+                  <li class="nav-item py-0"><a  class="nav-link active"  [routerLink]="['admin-manage-schema']" routerLinkActive="router-link-active" ><i class="fa fa-wrench pr-1"  aria-hidden="true"></i>Manage ad schemas<span class="sr-only">(current)</span></a></li>
+                  <li class="nav-item py-0"><a  class="nav-link active"  [routerLink]="['admin-users-list']" routerLinkActive="router-link-active" ><i class="fa fa-users pr-1"  aria-hidden="true"></i>Users list<span class="sr-only">(current)</span></a></li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0 ml-auto" (submit)="doSearch()">
+            <!-- height: 36px -->
+
+
+
+
+              <div class="input-group" style="margin-top: 2px;">
+                  <!-- (search)="doSearch()" (keyup)="doSearch()" are present for instant search -->
+                  <input data-toggle="tooltip" data-placement="bottom" title="Search bar: instant search ads by title, description and category name. You can search an ad by ID entering # before ID number, e.g.: #32. You can search an ad by seller entering @ before seller username, e.g.: @mario" id="searchInput" (search)="doSearch()" (keyup)="doSearch()"  [(ngModel)]="searchContent" name="searchField" class="form-control"  type="search" placeholder="Search" aria-label="Search">
+                  <div class="input-group-append">
+                    <button class="btn btn-primary"  type="submit" ><i class="fa fa-search" aria-hidden="true"></i></button>
+                      <button type="submit" class="btn btn-secondary" (click)="searchContent='';  "><i class="fa fa-times" aria-hidden="true"></i></button>
+                  </div>
+              </div>
+            </form>
+    </div>
+
+    <div class="navbar-collapse collapse" id="navbarNav" *ngIf="this.router.url.search('new-ad')>-1">
+      <ul class="navbar-nav">
+          <li class="nav-item py-0"><a class="nav-link active" [routerLink]="['ads-list']" routerLinkActive="router-link-active" ><i class="fa fa-home mr-1" aria-hidden="true"></i>Home<span class="sr-only">(current)</span></a></li>
+
+          <!-- <li class="nav-item py-0"><a class="nav-link active" [routerLink]="['notifs-list']" routerLinkActive="router-link-active" ><i class="fa fa-inbox mr-1" aria-hidden="true"></i>Notifications<span class="sr-only">(current)</span></a></li> -->
+        </ul>
+  </div>
+
+  <div class="navbar-collapse collapse" id="navbarNav" *ngIf="this.router.url.search('notifs-list')>-1">
+
+    <ul class="navbar-nav">
+
+      <!-- <div class="dropdown show">
+          <a class="nav-link active dropdown-toggle" href="#" role="link" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Show
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="javascript:void(0)">Approvals</a>
+            <a class="dropdown-item" href="javascript:void(0)">Prenotations</a>
+
+          </div>
+        </div> -->
+
+        <li class="nav-item py-0"><a class="nav-link active" [routerLink]="['ads-list']" routerLinkActive="router-link-active" ><i class="fa fa-home mr-1" aria-hidden="true"></i>Home<span class="sr-only">(current)</span></a></li>
+        <li class="nav-item py-0"><a id="somethingNew" class="nav-link active" [routerLink]="['new-ad']" routerLinkActive="router-link-active" ><i class="fa fa-plus-circle mr-1" aria-hidden="true"></i>New ad<span class="sr-only">(current)</span></a></li>
+        <li class="nav-item py-0"><a id="danger" href="javascript:void(0)" (click)="clearAllNotifs()" class="nav-link active"><i class="fa fa-trash mr-1" aria-hidden="true"></i>Clear all<span class="sr-only">(current)</span></a></li>
+
+      </ul>
+
+
+</div>
+
+<div class="navbar-collapse collapse" id="navbarNav" *ngIf="this.router.url.search('inspect-ad')>-1">
+
+    <ul class="navbar-nav">
+
+        <li class="nav-item py-0"><a class="nav-link active" [routerLink]="['admin-ads-list']" routerLinkActive="router-link-active" ><i class="fa fa-home mr-1" aria-hidden="true"></i>Home<span class="sr-only">(current)</span></a></li>
+        <li class="nav-item py-0"><a class="nav-link active" [routerLink]="['edit-ad']" [queryParams]="{idAd:idAd}" routerLinkActive="router-link-active"  ><i class="fa fa-edit " title="Edit" aria-hidden="true"></i> Edit this ad<span class="sr-only">(current)</span></a></li>
+
+
+
+      </ul>
+
+
+</div>
+
+
+<div class="navbar-collapse collapse" id="navbarNav" *ngIf="this.router.url.search('edit-ad')>-1">
+
+    <ul class="navbar-nav">
+
+        <li class="nav-item py-0"><a class="nav-link active" [routerLink]="['admin-ads-list']" routerLinkActive="router-link-active" ><i class="fa fa-home mr-1" aria-hidden="true"></i>Home<span class="sr-only">(current)</span></a></li>
+        <li class="nav-item py-0"><a class="nav-link active" [routerLink]="['inspect-ad']" [queryParams]="{idAd:idAd}" routerLinkActive="router-link-active" ><i class="fa fa-search mr-1" aria-hidden="true"></i>Inspect this ad<span class="sr-only">(current)</span></a></li>
+
+
+
+
+      </ul>
+
+
+</div>
+
+<div class="navbar-collapse collapse" id="navbarNav" *ngIf="this.router.url.search('admin-manage-schema')>-1">
+  <ul class="navbar-nav">
+      <li class="nav-item py-0"><a class="nav-link active" [routerLink]="['admin-ads-list']" routerLinkActive="router-link-active" ><i class="fa fa-home mr-1" aria-hidden="true"></i>Home<span class="sr-only">(current)</span></a></li>
+      <!-- <li class="nav-item py-0"><a class="nav-link active" [routerLink]="['inspect-ad']" [queryParams]="{idAd:idAd}" routerLinkActive="router-link-active" ><i class="fa fa-search mr-1" aria-hidden="true"></i>Inspect this ad<span class="sr-only">(current)</span></a></li> -->
+    </ul>
+</div>
+
+<div class="navbar-collapse collapse" id="navbarNav" *ngIf="this.router.url.search('admin-users-list')>-1">
+  <ul class="navbar-nav">
+      <li class="nav-item py-0"><a class="nav-link active" [routerLink]="['admin-ads-list']" routerLinkActive="router-link-active" ><i class="fa fa-home mr-1" aria-hidden="true"></i>Home<span class="sr-only">(current)</span></a></li>
+      <!-- <li class="nav-item py-0"><a class="nav-link active" [routerLink]="['inspect-ad']" [queryParams]="{idAd:idAd}" routerLinkActive="router-link-active" ><i class="fa fa-search mr-1" aria-hidden="true"></i>Inspect this ad<span class="sr-only">(current)</span></a></li> -->
+    </ul>
+</div>
+
+</nav>
+
+
+<!-- <div class="container-fluid py-3">
+    <div class="row">
+        <div class="col">Content</div>
+    </div>
+</div>
+ -->
+
+

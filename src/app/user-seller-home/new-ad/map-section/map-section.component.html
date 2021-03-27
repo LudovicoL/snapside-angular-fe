@@ -1,0 +1,67 @@
+<!-- <p>map-section works!</p> -->
+
+
+<!-- <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script> -->
+
+
+<div class="container-fluid" id="map-cont" >
+
+    <!-- <h1>Angular Google Maps with Places Search Example</h1> -->
+    <h5 class="text-light mt-3">Location picker:</h5>
+    <h5 style="font-size: medium;" class="text-light">Search addresses or manually drag the marker and pick locations on map</h5>
+    <div class="form-group">
+      <!-- <label>Enter address</label> -->
+      <!-- Search Nearest Location -->
+      <input type="text" class="form-control" (change)="keyAddress()" (keydown.enter)="$event.preventDefault();keyAddress()" placeholder="Enter address here" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+    </div>
+
+    <agm-map id="mmap" [latitude]="latitude" [longitude]="longitude" [zoom]="zoom" [scrollwheel]="null"  [mapTypeControl]='true'>
+      <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
+        (dragEnd)="markerDragEnd($event)"></agm-marker>
+    </agm-map>
+
+    <h5 class="text-light mt-2" *ngIf="address?.length>0">Address: {{address}}</h5>
+    <div class="text-light mb-2">Current map coordinates: Latitude: {{latitude}}, Longitude: {{longitude}}</div>
+
+
+    <button (click)="addMapLocation()" class="btn-lg btn-primary"><i class="fa fa-map-marker-alt mr-2"></i>Pick this location</button>
+
+
+
+  </div>
+
+  <div class="col p-0"> <hr class="mt-4 mb-2"></div>
+
+
+  <!-- <div class="container-fluid " style="height: 50px;"></div> -->
+
+
+<div id="map-cont" class="container-fluid w-100">
+    <h5 class="text-light mt-3">Picked locations preview:</h5>
+  <agm-map [latitude]="start.lat" [longitude]="start.long" [zoom]=8 [scrollwheel]="null" [mapTypeControl]='true'>
+      <agm-marker *ngFor="let data of points; let i = index" [latitude]="data.lat" [longitude]="data.long" [label]="toStr(i+1)">
+       </agm-marker>
+    </agm-map>
+
+
+    <ul class="list-group mt-3">
+        <li class="list-group-item border border-dark rounded mb-1" *ngFor="let data of points; let i = index" >
+            <button (click)="removeMapLocation(i)" class="btn btn-danger mr-4"><i class="fa fa-times "></i></button>
+            <button (click)="arrangeElements(i,'toBegin', points)" class="btn btn-info mr-1"><i class="fa fa-angle-double-up"></i></button>
+            <button (click)="arrangeElements(i,'toEnd', points)" class="btn btn-info mr-2"><i class="fa fa-angle-double-down"></i></button>
+
+            <button (click)="arrangeElements(i,'-1', points)" class="btn btn-primary mr-1"><i class="fa fa-angle-up"></i></button>
+            <button (click)="arrangeElements(i,'+1', points)" class="btn btn-primary"><i class="fa fa-angle-down"></i></button>
+            <a class="col mr-2"> <b>Map point #{{i+1}}</b> at {{data.address}} ({{data.lat}}, {{data.long}}) </a>
+        </li>
+      </ul>
+
+  </div>
+
+
+
+
+  <!-- <div class="container-fluid " style="height: 100px;"></div> -->
+
+
+

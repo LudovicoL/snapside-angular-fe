@@ -1,0 +1,152 @@
+<!-- <p>ad-calendar works!</p> -->
+
+<!-- <link rel="stylesheet" type="text/css" href="https://fullcalendar.io/js/fullcalendar-3.4.0/fullcalendar.min.css"> -->
+  <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" media="print"> -->
+
+  <!-- Fullcalendar hrefs for correct display.. I already included these in index.html
+  <link href='https://use.fontawesome.com/releases/v5.0.6/css/all.css' rel='stylesheet'>
+  <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' rel='stylesheet' /> -->
+
+
+  <!-- *FULLCALENDAR in html -->
+<!-- <div class="container-fluid p-3" id='cal'>
+<full-calendar id="calendar"
+  defaultView="dayGridMonth"
+  defaultDate= "2019-12-25"
+  editable="true"
+  [plugins]="calendarPlugins"
+  [weekends]="true"
+  [events]=this.events
+></full-calendar>
+</div> -->
+
+<!-- *FULLCALENDAR da usare con codice jquery presente nel .ts -->
+
+
+
+
+<h4 style="color:aliceblue; text-align: center; padding-top:20px">Booking calendar</h4>
+<hr>
+<div id="calStyle" class="container-fluid rounded border" style="background-color: rgba(255, 255, 255, 0.438); border: 1px solid rgba(0, 0, 0, 0.61); padding-top:20px;padding-bottom: 20px ;">
+<div id="calendar"></div>
+</div>
+
+
+
+
+<div id="createEventModal" class="modal fade" data-backdrop="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="modalTitle" style="text-align: left;">Customer details</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span> <span class="sr-only">close</span></button>
+            </div>
+            <div id="modalBody" class="modal-body">
+            <!-- <p id="realName"></p>
+            <p id="surname"></p>
+            <p id="username"></p>
+            <p id="email"></p>
+            <p id="address"></p> -->
+            <img *ngIf="selectedEventCustomer" [src]="selectedEventCustomer['userImgSanitized']"
+            class="rounded-circle img-fluid border border-dark p-0 mr-2 mb-3 mx-auto d-block"
+            style=" margin:auto ;height: 150px; width: 150px;"   alt="assets/utils_imgs/nouserimg.svg">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <!-- <th scope="col"> column title </th> -->
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <th scope="row">Name</th>
+                    <td id="realName">{{selectedEventCustomer?.name}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Surname</th>
+                    <td id="surname">{{selectedEventCustomer?.surname}}</td>
+
+                  </tr>
+                  <tr>
+                    <th scope="row">Username</th>
+                    <td id="username">{{selectedEventCustomer?.username}}</td>
+                  </tr>
+                  <tr>
+                      <th scope="row">E-mail</th>
+                      <td id="email">{{selectedEventCustomer?.email}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Phone number</th>
+                        <td id="phone">{{selectedEventCustomer?.phone}}</td>
+                      </tr>
+                    <tr>
+                        <th scope="row">Address</th>
+                        <td id="address">{{selectedEventCustomer?.address}}</td>
+                      </tr>
+                </tbody>
+              </table>
+            <div class="modal-footer pt-3">
+                <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">OK</button>
+                <!-- <button type="submit" class="btn btn-primary" id="submitButton">Save</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- MODAL CALENDAR BACKUP -->
+<!-- <div id="createEventModal" class="modal fade">
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span> <span class="sr-only">close</span></button>
+                <h4 id="modalTitle">Add an Event</h4>
+            </div>
+            <div id="modalBody" class="modal-body">
+               <div class="form-group">
+                    <input class="form-control" type="text" placeholder="Event Name" id="eventName">
+                </div>
+
+                <div class="form-group form-inline">
+                    <div class="input-group date" data-provide="datepicker">
+                        <input type="text" id="eventDueDate" class="form-control" placeholder="Due Date mm/dd/yyyy">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <textarea class="form-control" type="text" rows="4" placeholder="Event Description" id= "eventDescription"></textarea>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                <button type="submit" class="btn btn-primary" id="submitButton">Save</button>
+                <a id=modalTesto></a>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+

@@ -1,0 +1,83 @@
+<!-- <p>inspect-ad-gallery works!</p> -->
+
+
+<div id="carouselExampleIndicators" class="carousel slide" data-interval="false" data-ride="carousel" style="background-color: rgba(0, 0, 0, 0.884);" >
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" class="active" data-slide-to="0"></li>
+
+        <li *ngFor="let number of nImgsArray" data-target="#carouselExampleIndicators"  data-slide-to="this.number">
+          </li>
+    </ol>
+    <div class="carousel-inner" >
+        <div class="carousel-item active"  id="myDiv">
+
+            <img *ngIf="frontImg" class="d-block mx-auto" [src]="frontImg" alt="First slide " >
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Front cover</h5>
+            </div>
+
+          </div>
+
+        <div  *ngFor="let img of displayMedia; let i=index" class="carousel-item"  id="myDiv">
+            <img class="d-block mx-auto" [src]="img.content" alt="First slide " >
+
+            <div class="carousel-caption d-none d-md-block">
+              <h5>#{{i+1}}</h5>
+              <p>{{img.mediaName}}</p>
+            </div>
+
+          </div>
+
+
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <!-- <button (click)="blob(media[0].content)">BLOBB</button> -->
+
+
+
+
+<!-- Button trigger modal -->
+<div *ngIf="false">
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" (click)="myAlert('hello')">
+    View Image
+  </button>
+</div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" >
+      <div class="modal-content" >
+        <div class="modal-header" >
+          <h5 class="modal-title" id="exampleModalCenterTitle">View image</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+          <img src="https://analyticsindiamag.com/wp-content/uploads/2019/11/Image-Processing-Libraries-1600x1143.jpg" style="max-width: 100%;">
+        </div>
+        <div class="modal-footer" >
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+

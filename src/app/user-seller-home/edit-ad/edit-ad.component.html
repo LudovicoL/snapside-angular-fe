@@ -1,0 +1,272 @@
+<!-- <p>edit-ad works!</p> -->
+
+<!-- <p>new-ad works!</p> -->
+<!-- <h1>'CREATE NEW AD' INTERFACE IS HERE... </h1> -->
+
+
+<div class="container-fluid center mx-0 px-2">
+  <div class="jumbotron jumbotron-fluid py-3 mb-3" style="background-color:rgba(0, 0, 0, 0.60); ">
+      <div class="container-fluid p-0 m-0">
+        <h4 class="display-4 p-0" style="color:rgba(240, 248, 255, 0.555); font-size: xx-large; margin-left: 20px;">ID: #{{this.ad?.idAd}}</h4>
+            <h4 class="display-4 p-0" style="color:aliceblue; font-size: xx-large; margin-left: 20px;">Main information</h4>
+            <p class="lead pb-0 mb-0" style="color:aliceblue; margin-left:25px">Edit the general details for your ad.</p>
+          </div>
+        </div>
+
+
+<div class="container-fluid center mx-0 px-2">
+  <form>
+      <div class="form-group mb-3">
+          <input  [(ngModel)]="newTitle" name="nTitle" class="form-control form-control-lg mb-3 border border-dark" type="text" placeholder="Title: {{ad?.title}}" >
+          <textarea [(ngModel)]="newDescription" name="nDescription" style="min-height: 60px; max-height: 100vh;" class="form-control" id="exampleFormControlTextarea1" rows="6" placeholder="Insert description"></textarea>
+        </div>
+      </form>
+
+
+
+      <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Fixed price ({{this.currency}})</span>
+          </div>
+          <input  [(ngModel)]="newPrice" placeholder="{{ad?.sellPrice}}" name="nPrice" min=0 type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-default">Address</span>
+            </div>
+            <input  [(ngModel)]="newAddress" name="nAddress" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+          </div>
+
+          <!-- <div class="form-group">
+              <p class="mb-1" for="categorySel">Ad type:</p>
+              <select #adTypeSel class="form-control form-control" id="adTypeSel" style="width: fit-content;">
+                <option value="RENT">Rent</option>
+                <option value="SELL">Sell</option>
+
+              </select>
+          </div> -->
+</div>
+
+
+
+  <div class="jumbotron jumbotron-fluid py-3 mb-3" style="background-color:rgba(0, 0, 0, 0.60); ">
+      <div class="container-fluid p-0 m-0">
+            <h4 class="display-4 p-0" style="color:aliceblue; font-size: xx-large; margin-left: 20px;">Ad schema</h4>
+            <p class="lead pb-0 mb-0" style="color:aliceblue; margin-left:25px">You can edit the properties related to your ad schema.</p>
+          </div>
+        </div>
+<div class="container-fluid center mb-3 p-3 border border-light rounded" style="background-color: rgba(0, 0, 0, 0.50);">
+
+      <div class="form-group">
+          <h5 class="text-light" for="categorySel">Category:</h5>
+
+
+          <select readonly disabled #categorySel (change)="resetPropertiesInput()"  class="form-control form-control-lg" id="categorySel" style="width: fit-content;">
+            <option>{{category?.categoryName}}</option>
+
+          </select>
+      </div>
+      <div class="form-group">
+          <h5 class="text-light" for="categorySel">Item:</h5>
+          <select readonly disabled #itemSel class="form-control form-control-md" id="itemSel" style="width: fit-content;">
+            <option>{{item?.name}}</option>
+
+            </select>
+        </div>
+
+
+        <div class="clearfix"></div>
+        <h5 class="text-light" for="spcificProperties">Specific schema properties:</h5>
+        <h5 class="text-light" style="font-size: medium;" *ngIf="properties.length===0">No specific properties to set for this schema</h5>
+          <div class="input-group mb-3" *ngFor="let p of properties, let i=index">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">{{p.attributeName}}</span>
+              </div>
+              <input [(ngModel)]="attributeIndexes[p.idattribute]"  name="name{{p.idattribute}}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+
+        <!-- <h4 *ngFor="let p of properties">{{p.attributeName}}</h4>
+
+        <table class="table table-dark" style="min-width:50%; width: fit-content">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Property</th>
+                <th scope="col">Value</th>
+             </tr>
+            </thead>
+            <tbody >
+              <tr *ngFor="let p of properties">
+                <th scope="row"><label class="mt-2 pb-0">{{p.attributeName}}</label></th>
+                <td><input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></td>
+
+              </tr>
+
+            </tbody>
+          </table> -->
+
+
+
+        </div>
+
+
+        <div class="clearfix"></div>
+
+        <div class="jumbotron jumbotron-fluid py-3 mb-3" style="background-color:rgba(0, 0, 0, 0.60); ">
+            <div class="container-fluid p-0 m-0">
+                  <h4 class="display-4 p-0" style="color:aliceblue; font-size: xx-large; margin-left: 20px;">Availability dates interval</h4>
+                  <p class="lead pb-0 mb-0" style="color:aliceblue; margin-left:25px">You can extend the availability interval by postponing the end date. (Date format: DD/MM/YYYY)</p>
+                </div>
+              </div>
+
+<div class="container-fluid  mb-3 p-3 border border-light rounded" style="min-width:fit-content; background-color: rgba(0, 0, 0, 0.50);">
+
+        <mat-form-field class="example-full-width">
+            <input style="color:rgb(179, 179, 179)" disabled id="beginDatePicker" matInput [min]="minDateBegin" [max]="maxDateBegin" [matDatepicker]="picker" (dateChange)="addEventBegin($event)" placeholder="Begin date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+      <div class="clearfix"></div>
+
+        <mat-form-field class="example-full-width">
+            <input matInput id="endDatePicker" [min]="minDateEnd" [max]="maxDateEnd" [matDatepicker]="picker2" (dateChange)="addEventEnd($event)" placeholder="Edit end date">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+
+
+
+</div>
+
+
+<div class="jumbotron jumbotron-fluid py-3 mb-3" style="background-color:rgba(0, 0, 0, 0.60); ">
+  <div class="container-fluid px-1 m-0">
+        <h4 class="display-4 p-0" style="color:aliceblue; font-size: xx-large; margin-left: 20px;">Edit gallery images</h4>
+        <p class="lead pb-0 mb-0" style="color:aliceblue; margin-left:25px">Choose and rearrange the images to upload for your ad gallery. This first image in the upload list will be the preview image of this ad.</p>
+      </div>
+    </div>
+
+<div class="container-fluid center mx-0 px-2">
+
+          <div class="input-group mb-3 w-70" style="overflow:hidden">
+              <div class="input-group-prepend">
+                <span class="input-group-text">File chooser</span>
+              </div>
+              <div class="custom-file">
+                <input accept="image/*" (change)="changeListener($event); inputFileChooser.value=null" #inputFileChooser type="file" class="custom-file-input" id="inputGroupFile01">
+                <label class="custom-file-label" for="inputGroupFile01"><small>Click here to choose images to upload</small></label>
+              </div>
+            </div>
+
+
+          <ul class="list-group mt-3 mb-3">
+              <li class="list-group-item border border-dark rounded mb-1" *ngFor="let file of loadedImages; let i = index" [ngStyle]="{'background-color':(i==0) ? 'rgba(70, 200, 200,1)':'white','color':(i==0) ? 'blue':'auto'}">
+                  <button (click)="removeFile(i)" class="btn btn-danger mr-4"><i class="fa fa-trash"></i></button>
+                  <button (click)="arrangeElements(i,'toBegin', loadedImages)" class="btn btn-info mr-1"><i class="fa fa-angle-double-up"></i></button>
+                  <button (click)="arrangeElements(i,'toEnd', loadedImages)" class="btn btn-info mr-2"><i class="fa fa-angle-double-down"></i></button>
+
+                  <button (click)="arrangeElements(i,'-1', loadedImages)" class="btn btn-primary mr-1"><i class="fa fa-angle-up"></i></button>
+                  <button (click)="arrangeElements(i,'+1', loadedImages)" class="btn btn-primary"><i class="fa fa-angle-down"></i></button>
+                  <small class="col mr-2"> <img class="mx-2 border border-dark rounded" style="max-width: 200px; height: 46px;"  [src]="loadedImages[i].contentSanitized"> <b>Image #{{i+1}}:</b> "{{loadedImages[i].mediaName}}" {{(i==0)?(" - (Preview image)"):("")}} </small>
+              </li>
+            </ul>
+
+
+          </div>
+
+<div class="jumbotron jumbotron-fluid py-3 px-1 mb-3" style="background-color:rgba(0, 0, 0, 0.6); ">
+
+          <h4 class="display-4 p-0" style="color:aliceblue; font-size: xx-large; margin-left: 20px;">Edit maps locations</h4>
+          <p class="lead pb-0 mb-0" style="color:aliceblue; margin-left:25px">Here you can search specific addresses for your asset/service or manually pick the space coordinates directly on the map</p>
+
+      </div>
+
+
+<div class="container-fluid pt-1 pb-1 px-0 mb-3 mx-6 border border-light rounded" style="background-color: rgba(0, 0, 0, 0.50);">
+<app-map-section [points]="this.points"></app-map-section>
+</div>
+
+
+
+<div class="jumbotron jumbotron-fluid py-3 mb-3" style="background-color:rgba(0, 0, 0, 0.60); ">
+  <div class="container-fluid p-0 m-0">
+        <h4 class="display-4 p-0" style="color:aliceblue; font-size: xx-large; margin-left: 20px;">Ad publication status</h4>
+        <p class="lead pb-0 mb-0" style="color:aliceblue; margin-left:25px">Decide if you want to set this ad as a private draft or to go public. (Only you can see ad drafts until you decide to finalize and publish them later) </p>
+      </div>
+    </div>
+
+
+<!-- <div class="btn-group btn-group-toggle" data-toggle="buttons">
+  <label class="btn btn-secondary active">
+    <input type="radio" name="options" id="option1" autocomplete="off" checked> Draft
+  </label>
+  <label class="btn btn-success">
+    <input type="radio" name="options" id="option2" autocomplete="off"> Publish
+  </label>
+</div> -->
+
+
+<input id="myPublishToggle" #myPublishToggle  (change)="publishToggleMapper($event)" name="nToggle"  type="checkbox"  data-toggle="toggle" data-on="Public" data-off="Keep as draft" data-onstyle="success" data-offstyle="secondary" data-width="150" data-height="40">
+
+<div class="clearfix"></div>
+
+  <div class="col p-0"> <hr class="my-2"></div>
+<div class="mx-0 px-2 d-flex flex-row-reverse mb-4">
+<button   data-toggle="modal" data-target="#confirmModal" class="btn btn-success p-2"><i class="fa fa-check mr-2"></i>Save changes</button>
+
+</div>
+
+
+
+
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Confirm changes to ad "{{this.ad?.title}}" - #{{this.ad?.idAd}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            Do you confirm changes on this ad?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+
+          <!-- per fare il refresh in alternativa puoi usare la funzione refresh() che avevo fatto e serve a aggiornare l intera pagina invece del solo componente come con this.ngOnInit() -->
+          <button type="button" data-dismiss="modal" class="btn btn-success"  (click)="editAd();showToast()">Yes, apply changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+  <div aria-live="polite" aria-atomic="true" style="position: absolute; right:0px; top:0px; min-height: 200px;z-index: 199">
+      <!-- Position it -->
+      <div style="position: absolute; top: 0; right: 0;">
+
+        <!-- Then put toasts within -->
+        <div id="newAdCreated" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="min-width: 30vw;" data-autohide="false">
+          <div class="toast-header">
+            <!-- <img src="..." class="rounded mr-2" alt="..."> -->
+            <strong class="mr-auto bg-success">Snapside: New ad created</strong>
+            <small class="text-muted">-</small>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="toast-body">
+            "{{newTitle}}" wow has been added to your list
+          </div>
+        </div>
+
+
+      </div>
+    </div>

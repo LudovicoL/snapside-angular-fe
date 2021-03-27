@@ -1,0 +1,214 @@
+<!-- <p>inspect-ad works!</p>
+
+<h1>Ad ID: {{this.idAd}}</h1>
+<h1>Ad title: {{ad?.title}}</h1>
+ -->
+
+<div class="container-fluid center mx-0 px-2 mb-3" style=" width:100%; border: 0px solid green">
+<div id="headJ" class="jumbotron center pt-4 pb-4 mb-2 mx-0" style=" border: 0px solid red">
+<div class="container-fluid" style="margin-left: -5px;  overflow:hidden  ;border: 0px solid blue;">
+    <div class="image-parent rounded-small float-left pr-3 " style="margin-left:-15px; overflow:hidden; width: fit-content;height: fit-content; border: 0px solid green ">
+        <!-- img-fluid or img-thumbnail -->
+        <img [src]="getImageSanitized(ad?.files)" class="rounded-small d-flex align-items-center img-fluid float-left border border-dark "
+        style=" max-width: 20vw; max-height: 15vh; object-fit: contain; margin-left:0px"  alt="this_is_an_image">
+
+    </div>
+
+    <!-- Image link to new window -->
+    <!-- <a [href]="getImageSanitized(ad?.files)"><img [src]="getImageSanitized(ad?.files)"></a>"; -->
+
+    <h4 class="display-5 p-0" style=" margin-top:-4px">Title: {{ad?.title}} (#{{ad?.idAd}})</h4>
+    <p class="lead">Description: {{ad?.description}}</p>
+
+
+
+
+<!--
+    <div class="clearfix"></div>
+    <div class="col p-0"> <hr class="my-4"></div>
+    <p>Main details of this ad</p> -->
+  </div>
+    <!-- <p class="lead">
+      <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+    </p> -->
+
+    <div class="clearfix"></div>
+    <div class="col p-0"> <hr class="my-4"></div>
+
+
+    <div class="d-flex py-0 bd-highlight" style=" border: 0px solid green">
+
+
+            <div *ngIf="ad?.approved===0;">
+                <p style="color: indigo;"> Status: Pending </p>
+              </div>
+              <div *ngIf="ad?.approved===1;">
+                  <p style="color: rgb(0, 128, 0);"> Status: Published </p>
+                </div>
+                <div *ngIf="ad?.approved===2;">
+                    <p style="color: maroon;"> Status: Refused </p>
+                  </div>
+
+                  <div *ngIf="ad?.approved===-1;">
+                      <p style="color: darkslategrey;"> Status: Draft </p>
+                    </div>
+
+        </div>
+        <div *ngIf="now()>ad?.endDate;">
+            <p style="color: black;"><i class="fa fa-times-circle fa-lg mr-2 "></i><b>EXPIRED</b></p>
+          </div>
+
+        <p *ngIf="ad?.beginDate>0 && ad?.endDate>0 "><strong>Available from: {{(ad?.beginDate>0)? (prettyDate(ad?.beginDate)): ("Date not available") }}, to {{(ad?.endDate>0)? (prettyDate(ad?.endDate)): ("Date not available") }}</strong></p>
+        <div class="clearfix"></div>
+        <div class="col p-0"> <hr class="my-4"></div>
+
+    <p class="display-5" style="font-size: large;"><b>Category: </b> {{this.category?.categoryName}}</p>
+    <p class="display-5" style="font-size: large;"><b>Item: </b> {{this.item?.name}}</p>
+</div>
+
+</div>
+
+
+<div class="clearfix"></div>
+
+
+
+<div class="container-fluid center mx-0 px-2">
+    <div id="caps" class="jumbotron jumbotron-fluid py-3 mb-3" style="background-color:rgba(49, 49, 49, 0.50); ">
+        <div class="container-fluid p-0 m-0">
+              <h4 class="display-4 p-0" style="color:aliceblue; font-size: xx-large; margin-left: 20px;">General details</h4>
+              <p class="lead pb-0 mb-0" style="color:aliceblue; margin-left:25px">Here are listed the main details</p>
+            </div>
+          </div>
+
+    </div>
+    <div class="container-fluid rounded float-left ml-4" style=" width:fit-content; min-width:30% ; max-width:100%;">
+        <table class="table rounded table-striped table-dark table-borderless">
+            <thead>
+              <tr>
+                <th scope="col">Details:</th>
+                  <th scope="col"> </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <th scope="row">Price</th>
+                <td>{{this.currency}} {{prettyPrice(ad?.sellPrice)}}</td>
+              </tr>
+              <tr>
+                  <th scope="row">Address</th>
+                  <td>{{ad?.address}}</td>
+                </tr>
+                <!-- <tr>
+                    <th scope="row">Location</th>
+                    <td>{{ad?.coordinates}}</td>
+                  </tr> -->
+
+            </tbody>
+          </table>
+
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="container-fluid py-2 border border-light rounded mb-3" style="width:98vw;background-color: rgba(0, 0, 0, 0.50);">
+            <app-map-view [points]="ad?.coordinates"></app-map-view>
+            </div>
+
+    <div class="container-fluid center mx-0 px-2">
+    <div id="caps" class="jumbotron jumbotron-fluid py-3 mb-3" style="background-color:rgba(49, 49, 49, 0.50); ">
+        <div class="container-fluid p-0 m-0">
+              <h4 class="display-4 p-0" style="color:aliceblue; font-size: xx-large; margin-left: 20px;">Ad-specific properties</h4>
+              <p class="lead pb-0 mb-0" style="color:aliceblue; margin-left:25px">Here are listed the details which are specific for this ad schema </p>
+            </div>
+          </div>
+
+    </div>
+
+<div class="container-fluid rounded float-left ml-4" style=" width:fit-content; min-width:30% ; max-width:100%;">
+<table class="table rounded table-striped table-dark table-borderless">
+    <thead>
+      <tr>
+        <th scope="col">{{(attributes.length===0)?("No specific properties for this ad"):("Properties")}}</th>
+          <th scope="col"> </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let a of attributes">
+        <th scope="row">{{a.name}}</th>
+        <td>{{a.value}}</td>
+      </tr>
+
+    </tbody>
+  </table>
+
+</div>
+
+<div class="container" style="height: 30px;"></div>
+
+<div class="clearfix"></div>
+<!-- <div class="container-fluid rounded border" style="width:95vw;background-color: rgba(0, 0, 0, 0.301); border: 2px solid rgba(0, 0, 0, 0.61); padding-bottom:20px">
+  <app-ad-calendar [idAd]="idAd"></app-ad-calendar>
+</div> -->
+
+<div class="container-fluid center mx-0 px-2">
+<div id="caps" class="jumbotron jumbotron-fluid py-3 mb-3" style="background-color:rgba(49, 49, 49, 0.50); ">
+    <div class="container-fluid p-0 m-0">
+          <h4 class="display-4 p-0" style="color:aliceblue; font-size: xx-large; margin-left: 20px;">Available dates</h4>
+          <p class="lead pb-0 mb-0" style="color:aliceblue; margin-left:25px">Here you can look at availability dates that you decided for your ad and see which
+          customers have booked your offer and for what period of time.<br> To view details about your customers click on yellow event bars in booking calendar.</p>
+        </div>
+      </div>
+
+</div>
+
+<div *ngIf="this.mobile; else desktop">
+<div class="container-fluid rounded border" style="width:99%;font-size:x-small;background-color: rgba(0, 0, 0, 0.301); border: 2px solid rgba(0, 0, 0, 0.61); padding-bottom:20px">
+  <app-ad-calendar [idAd]="idAd"></app-ad-calendar>
+</div>
+</div>
+
+<ng-template #desktop>
+    <div id="calStyle" class="container-fluid rounded border" style="max-width:60%;background-color: rgba(0, 0, 0, 0.301); border: 2px solid rgba(0, 0, 0, 0.61); padding-bottom:20px">
+        <app-ad-calendar [idAd]="idAd"></app-ad-calendar>
+      </div>
+</ng-template>
+
+
+<!-- <div *ngFor="let a of attributes">
+  <p>{{a.name}} {{a.value}}</p>
+</div> -->
+
+<div class="container" style="height: 30px;"></div>
+
+<div class="clearfix"></div>
+
+<div class="container-fluid center mx-0 px-2">
+    <div id="caps" class="jumbotron jumbotron-fluid py-3 mb-3" style="background-color:rgba(49, 49, 49, 0.50);">
+    <div class="container-fluid p-0 m-0">
+          <h4 class="display-4 p-0" style="color:aliceblue; font-size: xx-large; margin-left: 20px;">Gallery</h4>
+          <p class="lead pb-0 mb-0" style="color:aliceblue; margin-left:25px">Here you can view the uploaded images about this ad</p>
+        </div>
+      </div>
+    </div>
+
+<app-inspect-ad-gallery [idAd]='idAd'></app-inspect-ad-gallery>
+
+<div class="container" style="height: 30px;"></div>
+
+<div class="clearfix"></div>
+
+
+
+
+<div class="container-fluid center mx-0 px-2">
+    <div id="caps" class="jumbotron jumbotron-fluid py-3 mb-3" style="background-color:rgba(49, 49, 49, 0.50);">
+    <div class="container-fluid p-0 m-0">
+          <h4 class="display-4 p-0" style="color:aliceblue; font-size: xx-large; margin-left: 20px;">Comments section</h4>
+          <p class="lead pb-0 mb-0" style="color:aliceblue; margin-left:25px">Here you can read, write and answer to comments related to this ad</p>
+        </div>
+      </div>
+    </div>
+
+<app-comment-section [idAd]='idAd'></app-comment-section>
+
+<div class="container" style="height: 150px;"></div>

@@ -1,0 +1,35 @@
+#cal{
+  background-color: rgba(85, 172, 253, 0.781) ;
+}
+
+.rounded {
+  border-radius:10px!important
+}
+.rounded-small {
+  border-radius:8px!important
+}
+
+
+body { background-color: black; }
+
+#headJ.jumbotron{
+  backdrop-filter: blur(20px);
+  background-color: rgba(240, 248, 255, 0.50);
+}
+
+#caps.jumbotron{
+  background-color:rgba(0, 0, 0, 0.60)!important;
+  backdrop-filter: blur(10px);
+  border-radius: 5px;
+ }
+
+
+ #calStyle{
+  backdrop-filter: blur(10px);
+ }
+
+ .table.table-striped{
+  border: none;
+  backdrop-filter: blur(20px);
+  background-color: rgba(0, 0, 0, 0.60);
+}

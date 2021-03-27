@@ -1,0 +1,94 @@
+<!-- <p>notifs-list works!</p>
+<h1>NOTIFICATIONS ARE LISTED HERE...</h1> -->
+<div *ngIf="this.loaded; else show_loading_message">
+<div class="container-fluid center" *ngIf="this.notifs.length===0">
+    <div class="jumbotron jumbotron-fluid py-3 mb-3 rounded" style="background-color:rgba(0, 0, 0, 0.60);">
+    <div class="container-fluid p-0 m-0">
+      <table>
+        <tr>
+          <td><i style="color:aliceblue" class="fas fa-inbox fa-2x ml-3 mr-1"></i> </td>
+          <td><h1 class="display-4 my-0 py-0" style="color:aliceblue; font-size: x-large ; margin-left:10px"><td>No notifications at the moment</h1></td>
+        </tr>
+      </table>
+
+
+      </div>
+
+
+        </div>
+
+    </div>
+
+
+
+
+
+<div class="list-group mx-3" >
+    <a id="notif-box" style="background-color: rgba(240, 248, 255, 0.75); " *ngFor="let n of notifs" href="javascript:void(0)" class="list-group-item list-group-item-action flex-column align-items-start my-1">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{n?.title}}</h5>
+        <small>{{prettyDate(n?.date)}}</small>
+      </div>
+      <p class="mb-1">{{n?.subject}}</p>
+      <div class="d-flex w-100 justify-content-between">
+      <small class="pt-2">{{n?.status}}</small>
+      <button class="btn btn-light" (click)="clearNotif(n.idNotif)"> Clear</button>
+      </div>
+    </a>
+
+  </div>
+
+</div>
+
+<ng-template #show_loading_message>
+    <div class="containter-fluid rounded rounded-pill mx-3 py-2" style="background-color: rgba(0, 0, 0, 0.60);">
+      <table>
+        <tr>
+          <!-- <td><img style="margin-left:10px;height: 50px; width: 50px;" src="assets/utils_imgs/spinner.gif"></td> -->
+        <!-- <td> <h4 class="media-heading" style="margin-left:10px; margin-top:5px; color: aliceblue"> <i class="fas fa-circle-notch fa-spin fa-2x mr-2"></i> Loading data...</h4></td></tr></table> -->
+        <td><i style="color:aliceblue" class="fas fa-circle-notch fa-spin fa-3x ml-2 mr-1"></i></td>
+        <td> <h5 class="media-heading" style="margin-left:10px; margin-top:5px; color: aliceblue"> Looking for notifications...</h5></td>
+      </tr>
+      </table>
+      </div>
+    </ng-template>
+
+
+<div aria-live="polite" aria-atomic="true" style="position: absolute; right:0px; top:0px; min-height: 200px;z-index: 199">
+    <!-- Position it -->
+    <div style="position: absolute; top: 0; right: 0;">
+
+      <!-- Then put toasts within -->
+      <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="min-width: 30vw;" data-autohide="false">
+        <div class="toast-header">
+          <!-- <img src="..." class="rounded mr-2" alt="..."> -->
+          <strong class="mr-auto">Bootstrap</strong>
+          <small class="text-muted">just now</small>
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="toast-body">
+          See? Just like this.
+        </div>
+      </div>
+
+      <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <!-- <img src="..." class="rounded mr-2" alt="..."> -->
+          <strong class="mr-auto">Bootstrap</strong>
+          <small class="text-muted">2 seconds ago</small>
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="toast-body">
+          Heads up, toasts will stack automatically
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+

@@ -1,0 +1,15 @@
+<!-- <p>map-view works!</p> -->
+
+<div class="container-fluid p-0 m-0" style="border:solid 0px green">
+<h5 class="text-light ">{{(parsedPoints)?("Map locations"):("No specific location to show for this ad")}}</h5>
+<agm-map [latitude]="start.lat" [longitude]="start.long" [zoom]=8 [scrollwheel]="null" [mapTypeControl]="true">
+    <agm-marker *ngFor="let data of parsedPoints; let i = index" [latitude]="data.lat" [longitude]="data.long" [label]="toStr(i+1)">
+     </agm-marker>
+  </agm-map>
+
+  <ul class="list-group mt-3">
+      <li class="list-group-item border border-dark rounded mb-1" *ngFor="let data of parsedPoints; let i = index" >
+          <a class="col mr-2"><i class="fa fa-map-marker-alt mr-1"></i> <b>Map point #{{i+1}}</b> at {{data.address}} ({{data.lat}}, {{data.long}}) </a>
+      </li>
+    </ul>
+  </div>

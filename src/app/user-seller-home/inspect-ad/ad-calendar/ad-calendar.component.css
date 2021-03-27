@@ -1,0 +1,24 @@
+#cal{
+  background-color: rgba(85, 172, 253, 0.781) ;
+}
+
+#calStyle{
+  backdrop-filter: blur(10px);
+}
+
+#createEventModal {
+  z-index: 1500;
+}
+
+.modal.fade {
+  z-index: 10000000 !important;
+}
+
+.modal-backdrop {
+  z-index: -1;
+}
+
+.modal {
+  z-index: 9999;
+  background-color:transparent!important;
+}

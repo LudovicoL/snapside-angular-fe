@@ -1,0 +1,296 @@
+<!-- <p>admin-ads-list works!</p> -->
+
+
+<div *ngIf="this.loaded; else show_loading_message">
+  <div class="container-fluid center">
+      <div class="jumbotron jumbotron-fluid py-3 mb-3 rounded" style="background-color:rgba(0, 0, 0, 0.60);">
+      <div class="container-fluid p-0 m-0">
+          <h1 class="display-4 my-0 py-0" style="color:aliceblue; font-size: x-large ; margin-left:10px">Global ads list</h1>
+          <h1 class="display-4 my-0 pt-1" style="color:aliceblue; font-size: larger ; margin-left:14px">{{fullAds.length}} elements in total</h1>
+        <div class="container-fluid" *ngIf="this.searchContent!=='' || this.filterByCat!=='All' || this.filterByStatus!=='All'">
+          <div class="clearfix"></div>
+          <div class="col p-0"> <hr class="my-2"></div>
+          <h1 class="display-4 my-0 py-0" style="color:aliceblue; font-size: larger;" >{{ads.length}} {{(this.searchContent==='')?("filtered results"):("search results for '"+this.searchContent+"'")}}</h1>
+        </div>
+
+
+          </div>
+        </div>
+      </div>
+<!-- <div class="container-fluid row justify-content-center"> -->
+<div *ngIf="filterByCat!=='All'" class="container-fluid">
+      <div class="btn-group btn-group-toggle my-0" data-toggle="buttons">
+
+          <label  class="btn btn-dark">
+              <input (click)="setFilterByItem('All')" type="radio" name="options" id="option1" autocomplete="off" checked> All items
+            </label>
+
+          <ng-container  *ngFor="let item of items" class="btn btn-dark" >
+            <ng-container  *ngIf="item.category_idcategory===filterByCat">
+                <label class="btn btn-dark">
+                   <input (click)="setFilterByItem(item.idItem)" type="radio" name="options" id="option1" autocomplete="off"> {{item.name}}
+                </label>
+          </ng-container>
+          </ng-container >
+
+        </div>
+
+
+
+</div>
+
+
+<!-- <button (click)=incasinaAds()>incasina ads</button> -->
+
+
+<!-- <button (click)="sortAds('id')">Sort by id</button>
+<button (click)="sortAds('title')">Sort by title</button>
+<button (click)="sortAds('startDate')">Sort by availability</button>
+{{this.sortAdBy}} -->
+
+<!-- <h1 class="display-4" style="font-size: x-large ;margin-left:15px" *ngIf="this.searchContent!=='' ">{{ads.length}} search results for: "{{this.searchContent}}"</h1> -->
+
+<!-- <h5 style="margin-left:15px" *ngIf="this.searchContent!=='' "> Search results for: "{{this.searchContent}}" </h5> -->
+
+
+
+<hr>
+<!-- <ul *ngFor="let ad of ads">
+  <li> {{ad.title}}</li>
+</ul> -->
+
+<!-- id: {{this.userid}} -->
+
+
+    <div *ngIf="ads.length===0 && this.searchContent==='' && this.filterByCat==='All' && this.filterByStatus==='All' ">
+        <div class="jumbotron jumbotron-fluid p-5" style="background-color:rgba(49, 49, 49, 0.50);">
+            <div class="container"  >
+              <h1 class="display-4" style="color:aliceblue; font-size: xx-large; margin-top: 0cm;">No ads to show now</h1>
+              <p class="lead" style="color:aliceblue">No ads created so far</p>
+            </div>
+          </div>
+      <!-- <h4 style="margin-left:10px">You have no ads to show now. Create a new one.</h4> -->
+    </div>
+
+    <div *ngIf="(fullAds.length>0 && ads.length===0) && (this.filterByCat!=='All' || this.filterByStatus!=='All') ">
+        <div class="jumbotron jumbotron-fluid p-5" style="background-color:rgba(167, 57, 57, 0.5);">
+            <div class="container"  >
+              <h1 class="display-4" style="color:rgb(255, 162, 170); font-size: xx-large; margin-top: 0cm;">No results for the selected filtering options</h1>
+              <p class="lead" style="color:aliceblue">Try with other filters or set them to 'Show all'</p>
+            </div>
+          </div>
+      <!-- <h4 style="margin-left:10px">You have no ads to show now. Create a new one.</h4> -->
+    </div>
+
+
+    <div style="padding-left: -1px; margin-left: -25px;margin-right: 15px; border: 0px solid green; float: center" class="list-group ">
+
+        <ul  *ngFor="let ad of ads | paginate: { itemsPerPage: this.itemsInPage, currentPage: p }">
+
+
+            <!-- <div *ngIf="ad.title.toLowerCase().search(this.searchContent.toLowerCase())>-1
+              || ad.description.toLowerCase().search(this.searchContent.toLowerCase())>-1
+              || this.searchContent===''; " class="container-fluid p-0 " style="margin-left:-20px"> -->
+
+
+              <!-- <a  class="list-group-item list-group-item-action flex-column align-items-start border border-primary" style="background-color:rgba(231, 231, 231, 0.801) ;"> -->
+
+        <div  class="list-group-item list-group-item-action flex-column align-items-start px-3"
+        [ngStyle]="{'background-color':(ad?.deleted==='DELETED') ? 'rgba(255,255,255,0.2)': ( ad?.approved !== 1) ? ((ad?.approved == 2)? 'rgba(255, 230, 240,0.80)':'rgba(240, 240, 240,0.70)') : 'rgba(240, 255, 230, 0.80)',
+        'border-color':(ad?.approved !== 1) ? ((ad?.approved == 2)? 'maroon':'darkslategray') : 'green'}">
+
+
+        <div class="container-fluid p-0 m-0 mr-2" style="height: fit-content; overflow:hidden; margin-left:-5px; width: 100%; padding-left:4px; border: 0px solid rgb(192, 192, 192);" >
+<div href="javascript:void(0)" class="container-fluid pl-0 pt-0 pr-0" style="border: 0px solid green; height: fit-content;  overflow:hidden;"  [routerLink]="['../inspect-ad']" [queryParams]="{idAd:ad.idAd}" routerLinkActive="router-link-active">
+                  <div class="image-parent rounded float-left pt-1 mr-2 ml-0 pl-0" style="width: fit-content;height: fit-content; overflow:hidden">
+                  <!-- img-fluid or img-thumbnail -->
+                  <img [src]="ad?.files" class="rounded d-flex align-items-center img-fluid border border-dark ml-0 pl-0" style="padding-left:-10px;object-fit: contain; width: auto;height: auto; max-width: 20vw; max-height: 15vh; "  alt="this_is_an_image">
+
+                  <!-- <img src="../../../assets/background/img1.jpg" class="rounded d-flex align-items-center img-fluid border border-dark" style="display: block ;width: auto;height: auto; max-height: 200px;max-width: 140px; vertical-align: middle;"  alt="this_is_an_image"> -->
+                  <!-- <img src="https://user-images.githubusercontent.com/1693592/29205168-723b7414-7e7b-11e7-9546-8193caf0a047.PNG" class="rounded d-flex align-items-center img-fluid border border-dark" style="height: auto ;width: 140px; vertical-align: middle;"  alt="this_is_an_image"> -->
+                  <!-- <img src="https://media.licdn.com/dms/image/C4D03AQGW21jdWTIL_g/profile-displayphoto-shrink_200_200/0?e=1581552000&v=beta&t=YutGr-hnQqgGiSbaE0h-Kops4BEYLXeLCYLyGEPCUnY" class="rounded d-flex align-items-center img-fluid border border-dark" style="height: auto ;width: 140px; vertical-align: middle;"  alt="this_is_an_image"> -->
+              </div>
+
+              <div  class="d-flex bd-highlight mb-0 pb-0" style=" border: 0px solid rgb(252, 255, 96);">
+                <div class="d-flex w-100 justify-content-between" >
+                  <h5 style="color: black;" class="mb-1">{{ad.title}}</h5>
+
+                      <p *ngIf="now()>ad?.endDate;" class="my-0 py-0" style="color: black;"><i class="fa fa-times-circle"></i></p>
+
+
+                  <!-- <div *ngIf="ad.active>0; else elseBlock">
+                      <div *ngIf="ad.approved===0;">
+                          <small style="color: black;"> Status: Pending </small>
+                        </div>
+                        <div *ngIf="ad.approved===1;">
+                            <small style="color: rgb(0, 128, 0);"> Status: Published </small>
+                          </div>
+                          <div *ngIf="ad.approved===2;">
+                              <small style="color: red;"> Status: Refused </small>
+                            </div>
+                    </div>
+                <ng-template #elseBlock>
+                  <div *ngIf="ad.approved===0;">
+                          <small style="color: black;"> Status: Pending draft </small>
+                        </div>
+                        <div *ngIf="ad.approved===1;">
+                            <small style="color: rgb(0, 128, 0);"> Status: Approved draft </small>
+                          </div>
+                          <div *ngIf="ad.approved===2;">
+                              <small style="color: red;"> Status: Refused draft </small>
+                            </div>
+                  </ng-template> -->
+
+                </div>
+              </div>
+
+              <p class="media-heading pl-1 pb-0 mb-0 mt-0" style="color:black">{{'#'}}{{ad?.idAd}}</p>
+              <p class="media-heading pl-1 pb-0 mb-0" style="color:black"><span  style="color:darkslategray"><u>Seller:</u> </span> <b> @{{ad?.sellerUsername}}</b> </p>
+                  <p class="media-heading pl-1 pb-0 mb-0" style="color:black"><span  style="color:darkslategray"><u>Description:</u> </span> {{(ad?.description.length>1000)? (ad.description | slice:0:1000)+'...':(ad.description)}}</p>
+                  <p class="media-heading pl-1 py-0 my-0" style="color:black"><span  style="color:darkslategray"><u>Category:</u> </span> {{ad?.category}} <i style="color: black;"class="fa fa-angle-right"></i> <i>{{ad?.nameItem}}</i></p>
+                  <p class="media-heading pl-1 py-0 my-0" style="color:black"><span  style="color:darkslategray"><u>Base price:</u> </span> {{(ad?.sellPrice)? (this.currency+" "+prettyPrice(ad?.sellPrice)) : ("No fixed price for this ad") }}</p>
+
+
+
+
+
+                  <div class="clearfix"></div>
+
+
+ </div>
+                  <div class="clearfix"></div>
+                  <div class="clearfix"></div>
+
+                  <div class="col p-0"><div class="clearfix"></div><hr></div>
+                  <div class="d-flex pl-0 pt-1 bd-highlight my-0" style=" border: 0px solid green">
+
+                    <small *ngIf="ad?.beginDate>0 && ad?.endDate>0 "><strong>Available from: {{(ad?.beginDate>0)? (prettyDate(ad?.beginDate)): ("Date not available") }}, to {{(ad?.endDate>0)? (prettyDate(ad?.endDate)): ("Date not available") }}</strong></small>
+
+                  </div>
+                  <div class="d-flex pl-0 pb-2 pt-0 bd-highlight" style=" border: 0px solid green; margin-top:-3px">
+                    <small *ngIf="ad?.address || ad?.coordinates "><strong>Address: {{ad?.address}}, Locations on map: {{(ad?.coordinates)? (parseJSON(ad?.coordinates)?.length+" place(s)"): ("No location available") }}</strong></small>
+                    </div>
+                  <div class="d-flex py-0 bd-highlight" style=" border: 0px solid green">
+
+
+                      <div *ngIf="ad?.approved===0;">
+                          <small style="color: indigo"> Status: Pending </small>
+                        </div>
+                        <div *ngIf="ad?.approved===1;">
+                            <small style="color: rgb(0, 128, 0);"> Status: Published </small>
+                          </div>
+                          <div *ngIf="ad?.approved===2;">
+                              <small style="color: maroon;"> Status: Refused </small>
+                            </div>
+
+                            <div *ngIf="ad?.approved===-1;">
+                                <small style="color: darkslategrey;"> Status: Draft </small>
+                              </div>
+
+
+                                </div>
+                              <div class="clearfix"></div>
+                               <div *ngIf="now()>ad?.endDate;">
+                                <p style="color: black;"><b>EXPIRED</b></p>
+                              </div>
+
+                      <div class="clearfix"></div>
+                      <div class="col p-0"><hr></div>
+
+        </div>
+                <div class="d-flex w-110 pt-0 justify-content-between pr-0 mr-111 pb-0 "  style=" margin-left:-5px; margin-right:-5px; border: 0px solid green">
+                    <div class="d-flex flex-row bd-highlight mb-0">
+                        <button [routerLink]="['../inspect-ad']" [queryParams]="{idAd:ad.idAd}" routerLinkActive="router-link-active"  type="button" class="btn btn-info ml-1 mr-2" ><i class="fa fa-search pr-2" aria-hidden="true"></i>Inspect</button>
+                        <ng-container *ngIf="ad?.approved!=-1">
+                          <button [disabled]="!(ad?.approved!==1)" (click)="approve(ad,'approve');"  type="button" class="btn btn-success ml-2 mr-2" ><i class="fa fa-check-square pr-2" aria-hidden="true"></i>Approve</button>
+                          <button [disabled]="ad?.approved===2" (click)="approve(ad,'refuse');"  type="button" class="btn btn-dark ml-1 mr-2" ><i class="fa fa-ban pr-2" aria-hidden="true"></i>Refuse</button>
+                        </ng-container>
+
+                        <!-- <button id="example"  [routerLink]="['../edit-ad']" [queryParams]="{idAd:ad.idAd}" routerLinkActive="router-link-active"  type="button" class="btn btn-primary" ><i class="fa fa-edit pr-2" title="Edit" aria-hidden="true"></i> Edit</button> -->
+                      </div>
+
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" (click)="setDeleteTitle(ad.title);setDeleteId(ad.idAd)"><i class="fa fa-eraser pr-2" aria-hidden="true"></i>Hard delete</button>
+                    <!-- MDB MODAL -->
+                    <!-- <button type="button" mdbBtn color="danger" class="relative waves-light"  (click)="noPropagation(key,$event);setDeleteTitle(ad.title);basicModal.show();"  mdbWavesEffect>Delete</button> -->
+
+
+                </div>
+
+        </div>
+      <!-- </div> -->
+      <!-- NGIF for search v1 -->
+      </ul>
+      </div>
+</div>
+
+
+    <ng-template #show_loading_message>
+      <div class="containter-fluid rounded rounded-pill mx-3 py-2" style="background-color: rgba(0, 0, 0, 0.60);">
+        <table>
+          <tr>
+            <!-- <td><img style="margin-left:10px;height: 50px; width: 50px;" src="assets/utils_imgs/spinner.gif"></td> -->
+          <!-- <td> <h4 class="media-heading" style="margin-left:10px; margin-top:5px; color: aliceblue"> <i class="fas fa-circle-notch fa-spin fa-2x mr-2"></i> Loading data...</h4></td></tr></table> -->
+          <td><i style="color:aliceblue" class="fas fa-circle-notch fa-spin fa-3x ml-2 mr-1"></i></td>
+          <td> <h4 class="media-heading" style="margin-left:10px; margin-top:5px; color: aliceblue"> Loading data...</h4></td>
+        </tr>
+        </table>
+        </div>
+      </ng-template>
+
+    <div class="container border border-dark rounded" id="pagin" *ngIf="loaded && ((this.ads.length+1 > this.itemsInPage) || searchContent!=='') && this.ads.length>0" >
+    <pagination-controls style="display: inline-block" (pageChange)="p = $event"></pagination-controls>
+    </div>
+
+    <div class="clearfix"></div>
+    <!-- <div class="container" style="height: 20px;"></div> -->
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Hard delete ad: {{getDeleteTitle()}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            Are you sure you want to delete this ad? This cannot be undone.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+          <!-- per fare il refresh in alternativa puoi usare la funzione refresh() che avevo fatto e serve a aggiornare l intera pagina invece del solo componente come con this.ngOnInit() -->
+          <button type="button" data-dismiss="modal" class="btn btn-danger" (click)="deleteAd(getDeleteId());">Yes, destroy it</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- MDB MODAL -->
+
+    <!-- <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+              <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title w-100" id="myModalLabel">Delete ad: {{getDeleteTitle()}}</h4>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to delete this ad?
+          </div>
+          <div class="modal-footer">
+            <button type="button" mdbBtn color="primary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Cancel</button>
+            <button type="button" mdbBtn color="danger" class="relative waves-light" (click)="basicModal.hide();refresh()" mdbWavesEffect>Yes, delete it</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+ -->
+

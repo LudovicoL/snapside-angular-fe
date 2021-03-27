@@ -1,0 +1,90 @@
+<!-- <div style="text-align: center">
+  <h1>Snapside Web</h1>
+</div> -->
+
+
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">  -->
+
+  <nav class="navbar navbar-expand-lg navbar-dark " style="background-color:rgba(49, 49, 49, 0.75)">
+    <a class="navbar-brand" href="#">
+      <img src="assets/utils_imgs/snapside_brand.svg" width="34" height="34" alt="">
+    </a>
+  <a class="navbar-brand" href="">Snapside Web</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      <!-- <i class="fa fa-bars" aria-hidden="true"></i> -->
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+
+
+
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li> -->
+        <!-- <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li> -->
+        <!-- <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li> -->
+      </ul>
+      <!-- <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form> -->
+
+          <ul class="navbar-nav ml-auto">
+              <li *ngIf="!(this.router.url.search('register')>-1)" class="nav-item active">
+                  <a class="nav-link active" [routerLink]="['register']">Register<span class="sr-only">(current)</span></a>
+                </li>
+
+              <li class="nav-item">
+                  <!-- <a class="nav-link" [routerLink]="['/about']" routerLinkActive="router-link-active" >About<span class="sr-only">(current)</span></a> -->
+                  <a class="nav-link" data-toggle="modal" data-target="#aboutModal.modal" href='#' >About<span class="sr-only">(current)</span></a>
+                </li>
+
+          </ul>
+
+    </div>
+
+
+  </nav>
+
+
+  <div id="aboutModal" class="modal fade">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header pb-1">
+                  <h4 id="modalTitle" style="text-align: left;">About this app</h4>
+                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span> <span class="sr-only">close</span></button>
+              </div>
+              <div id="modalBody" class="modal-body">
+              <!-- <p id="realName"></p>
+              <p id="surname"></p>
+              <p id="username"></p>
+              <p id="email"></p>
+              <p id="address"></p> -->
+              <img src="assets/utils_imgs/snapside_brand.svg" class=" img-fluid  p-0 mr-2 mb-3 mx-auto d-block"
+              style=" margin:auto ;height: 150px; width: 150px;"  alt="brand">
+             <h3>Snapside Web Application</h3>
+             <h5>Angular 8 - Spring Boot 2.2.1 - MySQL 6.3</h5>
+             <p>This app is designed for ads and offers publication and management</p>
+             <h5>Authors: Andrea Chezzi - Ludovico Larini</h5>
+             <h5>Unisalento 2019-2020</h5>
+              <div class="modal-footer pt-3 p-0">
+                  <button class="btn btn-primary px-2" style="width: 60px;" data-dismiss="modal" aria-hidden="true">OK</button>
+                  <!-- <button type="submit" class="btn btn-primary" id="submitButton">Save</button> -->
+              </div>
+          </div>
+      </div>
+  </div>
